@@ -1,0 +1,249 @@
+id: personal-pronoun-person-and-number
+title: Personal Pronoun Person and Number
+description: Identify the person and number of the subject in each sentence.
+repetitions: 10
+penalty_seconds: 5
+target_seconds: 45
+reveal_correct_answer: true
+
+questions:
+  - id: i
+    type: single_choice
+    prompt: "I am ready for school."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 1
+
+  - id: you-singular
+    type: single_choice
+    prompt: "You, Peter, are my best friend."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 2
+
+  - id: name-singular
+    type: single_choice
+    prompt: "Alice has a new book."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 3
+
+  - id: he
+    type: single_choice
+    prompt: "He plays football after school."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 3
+
+  - id: she
+    type: single_choice
+    prompt: "She likes drawing pictures."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 3
+
+  - id: it
+    type: single_choice
+    prompt: "It is a small green bird."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 3
+
+  - id: brother
+    type: single_choice
+    prompt: "My brother is ten years old."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 3
+
+  - id: sister
+    type: single_choice
+    prompt: "My sister sings beautifully."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 3
+
+  - id: we
+    type: single_choice
+    prompt: "We walk to the park together."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 4
+
+  - id: name-and-i
+    type: single_choice
+    prompt: "Tom and I are in the same class."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 4
+
+  - id: you-plural
+    type: single_choice
+    prompt: "You, Ben and Adam, are on my team."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 5
+
+  - id: they
+    type: single_choice
+    prompt: "They live next door."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 6
+
+  - id: brothers
+    type: single_choice
+    prompt: "My brothers ride their bikes every day."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 6
+
+  - id: sisters
+    type: single_choice
+    prompt: "My sisters are in the garden."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 6
+
+
+  - id: name-singular-2
+    type: single_choice
+    prompt: "Emma is my neighbour."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 3
+
+  - id: name-and-i-2
+    type: single_choice
+    prompt: "Luca and I love reading."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 4
+
+  - id: you-plural-2
+    type: single_choice
+    prompt: "You, Mia and Zoe, have new bags."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 5
+
+  - id: names-plural
+    type: single_choice
+    prompt: "Noah and Ella are at the library."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 6
+
+  - id: brother-and-sister
+    type: single_choice
+    prompt: "My brother and my sister are at home."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 6
+
+  - id: we-2
+    type: single_choice
+    prompt: "My friends and I are excited."
+    choices:
+      1: "E/1"
+      2: "E/2"
+      3: "E/3"
+      4: "T/1"
+      5: "T/2"
+      6: "T/3"
+    correct_answer: 4

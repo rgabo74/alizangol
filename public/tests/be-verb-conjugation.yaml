@@ -1,0 +1,80 @@
+id: be-verb-conjugation
+title: Be Verb Conjugation
+description: Choose the correct form of the verb "to be".
+repetitions: 10
+penalty_seconds: 5
+target_seconds: 20
+reveal_correct_answer: true
+
+questions:
+  - id: i
+    type: single_choice
+    prompt: "I ___ happy."
+    choices:
+      1: "am"
+      2: "are"
+      3: "is"
+    correct_answer: 1
+
+  - id: you
+    type: single_choice
+    prompt: "You ___ my friend."
+    choices:
+      1: "am"
+      2: "are"
+      3: "is"
+    correct_answer: 2
+
+  - id: he
+    type: single_choice
+    prompt: "He ___ at school."
+    choices:
+      1: "am"
+      2: "are"
+      3: "is"
+    correct_answer: 3
+
+  - id: she
+    type: single_choice
+    prompt: "She ___ very kind."
+    choices:
+      1: "am"
+      2: "are"
+      3: "is"
+    correct_answer: 3
+
+  - id: it
+    type: single_choice
+    prompt: "It ___ cold today."
+    choices:
+      1: "am"
+      2: "are"
+      3: "is"
+    correct_answer: 3
+
+  - id: we
+    type: single_choice
+    prompt: "We ___ ready."
+    choices:
+      1: "am"
+      2: "are"
+      3: "is"
+    correct_answer: 2
+
+  - id: they
+    type: single_choice
+    prompt: "They ___ in the garden."
+    choices:
+      1: "am"
+      2: "are"
+      3: "is"
+    correct_answer: 2
+
+  - id: you-plural
+    type: single_choice
+    prompt: "You ___ all welcome here."
+    choices:
+      1: "am"
+      2: "are"
+      3: "is"
+    correct_answer: 2

@@ -1,0 +1,72 @@
+id: have-verb-conjugation
+title: Have Verb Conjugation
+description: Choose the correct form of the verb "to have".
+repetitions: 8
+penalty_seconds: 5
+target_seconds: 20
+reveal_correct_answer: true
+
+questions:
+  - id: i
+    type: single_choice
+    prompt: "I ___ a new book."
+    choices:
+      1: "have"
+      2: "has"
+    correct_answer: 1
+
+  - id: you
+    type: single_choice
+    prompt: "You ___ a great idea."
+    choices:
+      1: "have"
+      2: "has"
+    correct_answer: 1
+
+  - id: he
+    type: single_choice
+    prompt: "He ___ a blue bicycle."
+    choices:
+      1: "have"
+      2: "has"
+    correct_answer: 2
+
+  - id: she
+    type: single_choice
+    prompt: "She ___ a lovely dog."
+    choices:
+      1: "have"
+      2: "has"
+    correct_answer: 2
+
+  - id: it
+    type: single_choice
+    prompt: "It ___ four legs."
+    choices:
+      1: "have"
+      2: "has"
+    correct_answer: 2
+
+  - id: we
+    type: single_choice
+    prompt: "We ___ English class today."
+    choices:
+      1: "have"
+      2: "has"
+    correct_answer: 1
+
+  - id: they
+    type: single_choice
+    prompt: "They ___ dinner at six o'clock."
+    choices:
+      1: "have"
+      2: "has"
+    correct_answer: 1
+
+  - id: you-plural
+    type: single_choice
+    prompt: "You ___ many good questions."
+    choices:
+      1: "have"
+      2: "has"
+    correct_answer: 1
