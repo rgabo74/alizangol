@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
+
 const virtualTests = 'virtual:practice-tests';
 const resolvedVirtualTests = `\0${virtualTests}`;
 
@@ -30,4 +31,4 @@ function practiceTestsPlugin() {
   };
 }
 
-export default defineConfig({ plugins: [react(), practiceTestsPlugin()] });
+export default defineConfig({ plugins: [react(), practiceTestsPlugin()], base: '/alizangol/' });
