@@ -16,3 +16,8 @@
 
 .home-section + .home-section { margin-top: 42px; }
 .home-section > .eyebrow { display: inline-block; font-size: .82rem; letter-spacing: .17em; }
+
+.answer-summary { margin: -14px 0 20px; color: #0f766e; font-weight: 700; }
+.answer-count { margin-left: 4px; color: #0f766e; font-size: .82rem; }
+
+.feedback { position: fixed; z-index: 20; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); width: min(calc(100vw - 32px), 632px); margin: 0; transform: translateX(-50%); box-shadow: 0 12px 28px #12304a33; }

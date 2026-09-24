@@ -115,6 +115,8 @@ function App() {
   const [answer, setAnswer] = useState('');
   const [feedback, setFeedback] = useState(null);
   const [result, setResult] = useState(null);
+  const [isTimerPaused, setIsTimerPaused] = useState(false);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
 
   const activeQuestion = queue[index];
   const totalTime = elapsed + penalty;
@@ -129,7 +131,7 @@ function App() {
     setPenalty(0);
     setAnswer('');
     setFeedback(null);
-    setResult(null);
+    setResult(null); setCorrectAnswers(0); setIsTimerPaused(false);
   };
 
   const clearTest = () => {
@@ -141,7 +143,7 @@ function App() {
     setPenalty(0);
     setAnswer('');
     setFeedback(null);
-    setResult(null);
+    setResult(null); setCorrectAnswers(0); setIsTimerPaused(false);
   };
 
   const exitTest = () => {
@@ -158,28 +160,28 @@ function App() {
   }, [startedAt]);
 
   useEffect(() => {
-    if (!startedAt || result) return undefined;
-    const timer = window.setInterval(() => setElapsed(Math.floor((Date.now() - startedAt) / 1000)), 250);
+    if (!startedAt || result || isTimerPaused) return undefined;
+    const timer = window.setInterval(() => setElapsed((seconds) => seconds + 1), 1000);
     return () => window.clearInterval(timer);
-  }, [startedAt, result]);
+  }, [startedAt, result, isTimerPaused]);
 
   const startTest = () => {
     if (!window.history.state?.alicePracticeTest) {
       window.history.pushState({ ...window.history.state, alicePracticeTest: true }, '');
     }
     setQueue(chooseQuestions(selectedTest));
-    setIndex(0); setPenalty(0); setElapsed(0); setAnswer(''); setFeedback(null); setResult(null);
+    setIndex(0); setPenalty(0); setElapsed(0); setAnswer(''); setFeedback(null); setResult(null); setCorrectAnswers(0); setIsTimerPaused(false);
     setStartedAt(Date.now());
   };
 
-  const finishTest = (newPenalty) => {
-    const seconds = Math.floor((Date.now() - startedAt) / 1000) + newPenalty;
+  const finishTest = (newPenalty, completedCorrectAnswers) => {
+    const seconds = elapsed + newPenalty;
     const before = getScores(selectedTest.id);
     const isPersonalBest = before.length === 0 || seconds < before[0].seconds;
     const reachedGoal = seconds <= selectedTest.target_seconds;
-    const entry = { seconds, date: new Date().toISOString(), reachedGoal };
+    const entry = { seconds, date: new Date().toISOString(), reachedGoal, goodAnswers: completedCorrectAnswers, repetitions: queue.length };
     saveScore(selectedTest.id, entry);
-    setResult({ seconds, isPersonalBest, reachedGoal });
+    setResult({ seconds, isPersonalBest, reachedGoal, goodAnswers: completedCorrectAnswers, repetitions: queue.length });
   };
 
   const submit = (picked) => {
@@ -191,6 +193,8 @@ function App() {
         ? JSON.stringify([...proposed].sort()) === JSON.stringify([...(activeQuestion.correct_answers || [])].sort())
         : Number(proposed) === Number(activeQuestion.correct_answer);
     const addedPenalty = correct ? penalty : penalty + (selectedTest.penalty_seconds ?? 5);
+    const completedCorrectAnswers = correctAnswers + (correct ? 1 : 0);
+    if (correct) setCorrectAnswers(completedCorrectAnswers);
     if (!correct) setPenalty(addedPenalty);
     const correctText = activeQuestion.type === 'free_text'
       ? activeQuestion.correct_answer
@@ -198,10 +202,11 @@ function App() {
         ? activeQuestion.correct_answers.map((id) => activeQuestion.choices[id]).join(', ')
         : activeQuestion.choices[activeQuestion.correct_answer];
     setFeedback({ correct, correctText });
+    setIsTimerPaused(true);
     window.setTimeout(() => {
-      if (index + 1 >= queue.length) finishTest(addedPenalty);
-      else { setIndex((current) => current + 1); setAnswer(''); setFeedback(null); }
-    }, correct || !selectedTest.reveal_correct_answer ? 650 : 1500);
+      if (index + 1 >= queue.length) finishTest(addedPenalty, completedCorrectAnswers);
+      else { setIndex((current) => current + 1); setAnswer(""); setFeedback(null); setIsTimerPaused(false); }
+    }, correct ? 650 : 2000);
   };
 
   if (!selectedTest) return <Home onSelect={selectTest} />;
@@ -243,9 +248,9 @@ function Practice({ test, question, index, total, totalTime, answer, setAnswer, 
 }
 
 function Results({ test, result, leaderboard, onAgain, onHome }) {
-  return <main className="shell results">{result.reachedGoal && <div className="fireworks" aria-hidden="true">✦ ✧ ✦ ✧ ✦</div>}<section className="result-card"><div className="celebration">{result.isPersonalBest ? '🏆' : result.reachedGoal ? '🎆' : '🌷'}</div><span className="eyebrow">PRACTICE COMPLETE</span><h1>{result.isPersonalBest ? 'New best score!' : 'Well done!'}</h1><p className="time">{formatTime(result.seconds)}</p>{result.reachedGoal && <p className="goal-message">You reached your goal. You won 20 points!</p>}<button className="primary" onClick={onAgain}>Practice again <span>↻</span></button><button className="text-button" onClick={onHome}>Choose another test</button></section><Leaderboard entries={leaderboard} /></main>;
+  return <main className="shell results">{result.reachedGoal && <div className="fireworks" aria-hidden="true">✦ ✧ ✦ ✧ ✦</div>}<section className="result-card"><div className="celebration">{result.isPersonalBest ? '🏆' : result.reachedGoal ? '🎆' : '🌷'}</div><span className="eyebrow">PRACTICE COMPLETE</span><h1>{result.isPersonalBest ? 'New best score!' : 'Well done!'}</h1><p className="time">{formatTime(result.seconds)}</p><p className="answer-summary">✓ {result.goodAnswers}/{result.repetitions} correct answers</p>{result.reachedGoal && <p className="goal-message">You reached your goal. You won 20 points!</p>}<button className="primary" onClick={onAgain}>Practice again <span>↻</span></button><button className="text-button" onClick={onHome}>Choose another test</button></section><Leaderboard entries={leaderboard} /></main>;
 }
 
-function Leaderboard({ entries }) { return <section className="leaderboard"><div><span className="eyebrow">YOUR BEST TIMES</span><h2>Top 5</h2></div>{entries.length ? <ol>{entries.map((entry, i) => <li key={`${entry.date}-${i}`}><span className="rank">{i + 1}</span><span>{formatTime(entry.seconds)} {entry.reachedGoal && <b title="Goal reached">🔥</b>}<small>{new Date(entry.date).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}</small></span></li>)}</ol> : <p className="empty">Your first result will appear here.</p>}</section>; }
+function Leaderboard({ entries }) { return <section className="leaderboard"><div><span className="eyebrow">YOUR BEST TIMES</span><h2>Top 5</h2></div>{entries.length ? <ol>{entries.map((entry, i) => <li key={entry.date + "-" + i}><span className="rank">{i + 1}</span><span>{formatTime(entry.seconds)} {Number.isInteger(entry.goodAnswers) && <b className="answer-count">✓ {entry.goodAnswers}/{entry.repetitions}</b>} {entry.reachedGoal && <b title="Goal reached">🔥</b>}<small>{new Date(entry.date).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })}</small></span></li>)}</ol> : <p className="empty">Your first result will appear here.</p>}</section>; }
 
 createRoot(document.getElementById('root')).render(<App />);
