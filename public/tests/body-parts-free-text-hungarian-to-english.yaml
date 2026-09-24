@@ -1,9 +1,9 @@
 id: body-parts-free-text-hungarian-to-english
 title: 'Body Parts: Type in English'
 description: Read the Hungarian body-part word and type its English translation.
-repetitions: 30
+repetitions: 20
 penalty_seconds: 5
-target_seconds: 90
+target_seconds: 120
 reveal_correct_answer: true
 questions:
   - id: body-part-1

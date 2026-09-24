@@ -1,9 +1,9 @@
 id: body-parts-vocabulary
 title: Body Parts Vocabulary
 description: 'Choose the correct translation in both directions: Hungarian to English and English to Hungarian.'
-repetitions: 30
+repetitions: 20
 penalty_seconds: 5
-target_seconds: 90
+target_seconds: 1:30
 reveal_correct_answer: true
 questions:
   - id: hungarian_to_english-1
