@@ -3,7 +3,5 @@ type: vocabulary
 vocabulary_mode: multiple_choice_bidirectional
 title: Choose a Translation
 description: Choose the correct translation in Hungarian and English.
-repetitions: 30
 penalty_seconds: 5
-target_seconds: 90
 reveal_correct_answer: true

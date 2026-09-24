@@ -1,6 +1,8 @@
 id: body-parts
 title: Body Parts
 description: Learn the English and Hungarian names for common body parts.
+repetitions: 30
+target_seconds_per_repetition: 3
 
 words:
   - english: face

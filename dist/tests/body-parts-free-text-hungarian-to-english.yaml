@@ -3,7 +3,5 @@ type: vocabulary
 vocabulary_mode: free_text_hungarian_to_english
 title: Type in English
 description: Read a Hungarian word and type its English translation.
-repetitions: 30
 penalty_seconds: 5
-target_seconds: 90
 reveal_correct_answer: true

@@ -1,6 +1,8 @@
 id: body-parts
 title: Body Parts
 description: Learn the English and Hungarian names for common body parts.
+repetitions: 30
+target_seconds_per_repetition: 3
 
 words:
   - english: face
@@ -51,3 +53,20 @@ words:
     hungarian: lábujjak
   - english: mouth
     hungarian: száj
+  - english: eye
+    hungarian: szem
+  - english: head
+    hungarian: fej
+  - english: ears
+    hungarian: fülek
+  - english: hair
+    hungarian: haj
+  - english: hand
+    hungarian: kéz
+  - english: tooth
+    hungarian: fog
+  - english: teeth
+    hungarian: fogak
+  - english: lips
+    hungarian: ajak
+    

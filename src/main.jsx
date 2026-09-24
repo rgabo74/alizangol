@@ -59,6 +59,8 @@ function multipleChoiceQuestion(words, word, direction, index) {
 
 function buildVocabularyTest(mode, vocabulary) {
   const words = vocabulary.words;
+  const repetitions = Number(vocabulary.repetitions);
+  const targetSecondsPerRepetition = Number(vocabulary.target_seconds_per_repetition);
   const questions = mode.vocabulary_mode === 'multiple_choice_bidirectional'
     ? [
       ...words.map((word, index) => multipleChoiceQuestion(words, word, 'hungarian_to_english', index)),
@@ -79,6 +81,9 @@ function buildVocabularyTest(mode, vocabulary) {
     description: mode.description,
     sourceMode: mode,
     vocabulary,
+    repetitions,
+    target_seconds_per_repetition: targetSecondsPerRepetition,
+    target_seconds: repetitions * targetSecondsPerRepetition,
     questions,
   };
 }
@@ -206,7 +211,7 @@ function VocabularyPicker({ mode, onBack, onSelect }) {
 }
 
 function TestIntro({ test, leaderboard, onStart, onBack }) {
-  return <main className="shell"><button className="back" onClick={onBack}>← All tests</button><section className="hero-card"><span className="card-icon big">✦</span><h1>{test.title}</h1><p>{test.description}</p><div className="stats"><span><b>{test.repetitions}</b> questions</span><span><b>{formatTime(test.target_seconds)}</b> goal</span><span><b>+{test.penalty_seconds}s</b> wrong answer</span></div><button className="primary" onClick={onStart}>Start practice <span>→</span></button></section><Leaderboard entries={leaderboard} /></main>;
+  return <main className="shell"><button className="back" onClick={onBack}>← All tests</button><section className="hero-card"><span className="card-icon big">✦</span><h1>{test.title}</h1><p>{test.description}</p><div className="stats"><span><b>{test.repetitions}</b> questions</span><span><b>{test.target_seconds_per_repetition ? `s` : formatTime(test.target_seconds)}</b>{test.target_seconds_per_repetition ? " per question" : " goal"}</span><span><b>+{test.penalty_seconds}s</b> wrong answer</span></div><button className="primary" onClick={onStart}>Start practice <span>→</span></button></section><Leaderboard entries={leaderboard} /></main>;
 }
 
 function Practice({ test, question, index, total, totalTime, answer, setAnswer, feedback, onSubmit, onExit }) {
