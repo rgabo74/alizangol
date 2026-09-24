@@ -38,7 +38,6 @@ function App() {
   const [answer, setAnswer] = useState('');
   const [feedback, setFeedback] = useState(null);
   const [result, setResult] = useState(null);
-  const inputRef = useRef(null);
 
   const activeQuestion = queue[index];
   const totalTime = elapsed + penalty;
@@ -56,17 +55,41 @@ function App() {
     setResult(null);
   };
 
+  const clearTest = () => {
+    setSelectedTest(null);
+    setQueue([]);
+    setIndex(0);
+    setStartedAt(0);
+    setElapsed(0);
+    setPenalty(0);
+    setAnswer("");
+    setFeedback(null);
+    setResult(null);
+  };
+
+  const exitTest = () => {
+    if (window.history.state?.alicePracticeTest) window.history.back();
+    else clearTest();
+  };
+
+  useEffect(() => {
+    const handleBack = () => {
+      if (startedAt) clearTest();
+    };
+    window.addEventListener("popstate", handleBack);
+    return () => window.removeEventListener("popstate", handleBack);
+  }, [startedAt]);
+
   useEffect(() => {
     if (!startedAt || result) return undefined;
     const timer = window.setInterval(() => setElapsed(Math.floor((Date.now() - startedAt) / 1000)), 250);
     return () => window.clearInterval(timer);
   }, [startedAt, result]);
 
-  useEffect(() => {
-    if (activeQuestion?.type === 'free_text' && !feedback) inputRef.current?.focus();
-  }, [activeQuestion, feedback]);
-
   const startTest = () => {
+    if (!window.history.state?.alicePracticeTest) {
+      window.history.pushState({ ...window.history.state, alicePracticeTest: true }, "");
+    }
     setQueue(chooseQuestions(selectedTest));
     setIndex(0); setPenalty(0); setElapsed(0); setAnswer(''); setFeedback(null); setResult(null);
     setStartedAt(Date.now());
@@ -105,9 +128,9 @@ function App() {
   };
 
   if (!selectedTest) return <Home onSelect={selectTest} />;
-  if (result) return <Results test={selectedTest} result={result} leaderboard={leaderboard} onAgain={startTest} onHome={() => setSelectedTest(null)} />;
+  if (result) return <Results test={selectedTest} result={result} leaderboard={leaderboard} onAgain={startTest} onHome={exitTest} />;
   if (!startedAt) return <TestIntro test={selectedTest} leaderboard={leaderboard} onStart={startTest} onBack={() => setSelectedTest(null)} />;
-  return <Practice test={selectedTest} question={activeQuestion} index={index} total={queue.length} totalTime={totalTime} answer={answer} setAnswer={setAnswer} feedback={feedback} onSubmit={submit} />;
+  return <Practice test={selectedTest} question={activeQuestion} index={index} total={queue.length} totalTime={totalTime} answer={answer} setAnswer={setAnswer} feedback={feedback} onSubmit={submit} onExit={exitTest} />;
 }
 
 function Home({ onSelect }) {
@@ -118,11 +141,15 @@ function TestIntro({ test, leaderboard, onStart, onBack }) {
   return <main className="shell"><button className="back" onClick={onBack}>← All tests</button><section className="hero-card"><span className="card-icon big">✦</span><h1>{test.title}</h1><p>{test.description}</p><div className="stats"><span><b>{test.repetitions}</b> questions</span><span><b>{formatTime(test.target_seconds)}</b> goal</span><span><b>+{test.penalty_seconds}s</b> wrong answer</span></div><button className="primary" onClick={onStart}>Start practice <span>→</span></button></section><Leaderboard entries={leaderboard} /></main>;
 }
 
-function Practice({ test, question, index, total, totalTime, answer, setAnswer, feedback, onSubmit }) {
+function Practice({ test, question, index, total, totalTime, answer, setAnswer, feedback, onSubmit, onExit }) {
   const [multi, setMulti] = useState([]);
+  const inputRef = useRef(null);
   useEffect(() => setMulti([]), [question]);
+  useEffect(() => {
+    if (question?.type === "free_text" && !feedback) inputRef.current?.focus();
+  }, [question, feedback]);
   const toggle = (choice) => setMulti((current) => current.includes(choice) ? current.filter((item) => item !== choice) : [...current, choice]);
-  return <main className="shell practice"><div className="practice-top"><span>Question {index + 1} of {total}</span><strong>⏱ {formatTime(totalTime)}</strong></div><div className="progress"><i style={{ width: `${(index / total) * 100}%` }} /></div><section className="question-card"><span className="eyebrow">{test.title}</span><h2>{question.prompt}</h2>{question.type === 'free_text' ? <form onSubmit={(event) => { event.preventDefault(); onSubmit(); }}><input ref={inputRef} value={answer} disabled={!!feedback} onChange={(event) => setAnswer(event.target.value)} placeholder="Type your answer" autoComplete="off" /><button className="primary" disabled={!answer.trim() || !!feedback}>Check answer</button></form> : <div className="choices">{Object.entries(question.choices).map(([id, label]) => { const numeric = Number(id); const selected = question.type === 'multi_choice' ? multi.includes(numeric) : false; return <button key={id} className={`choice ${selected ? 'selected' : ''}`} disabled={!!feedback} onClick={() => question.type === 'multi_choice' ? toggle(numeric) : onSubmit(numeric)}><b>{id}</b>{label}</button>; })}{question.type === 'multi_choice' && <button className="primary" disabled={!multi.length || !!feedback} onClick={() => onSubmit(multi)}>Check answer</button>}</div>}{feedback && <div className={`feedback ${feedback.correct ? 'good' : 'bad'}`}>{feedback.correct ? '✓ Great job!' : <>Not quite. {test.reveal_correct_answer && <>The answer is <b>{feedback.correctText}</b>.</>}</>}</div>}</section></main>;
+  return <main className="shell practice"><div className="practice-top"><button className="exit-test" onClick={onExit}>Exit test</button><span>Question {index + 1} of {total}</span><strong>⏱ {formatTime(totalTime)}</strong></div><div className="progress"><i style={{ width: `${(index / total) * 100}%` }} /></div><section className="question-card"><span className="eyebrow">{test.title}</span><h2>{question.prompt}</h2>{question.type === 'free_text' ? <form onSubmit={(event) => { event.preventDefault(); onSubmit(); }}><input ref={inputRef} value={answer} disabled={!!feedback} onChange={(event) => setAnswer(event.target.value)} placeholder="Type your answer" autoComplete="off" /><button className="primary" disabled={!answer.trim() || !!feedback}>Check answer</button></form> : <div className="choices">{Object.entries(question.choices).map(([id, label]) => { const numeric = Number(id); const selected = question.type === 'multi_choice' ? multi.includes(numeric) : false; return <button key={id} className={`choice ${selected ? 'selected' : ''}`} disabled={!!feedback} onClick={() => question.type === 'multi_choice' ? toggle(numeric) : onSubmit(numeric)}><b>{id}</b>{label}</button>; })}{question.type === 'multi_choice' && <button className="primary" disabled={!multi.length || !!feedback} onClick={() => onSubmit(multi)}>Check answer</button>}</div>}{feedback && <div className={`feedback ${feedback.correct ? 'good' : 'bad'}`}>{feedback.correct ? '✓ Great job!' : <>Not quite. {test.reveal_correct_answer && <>The answer is <b>{feedback.correctText}</b>.</>}</>}</div>}</section></main>;
 }
 
 function Results({ test, result, leaderboard, onAgain, onHome }) {
