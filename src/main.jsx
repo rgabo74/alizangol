@@ -134,7 +134,7 @@ function App() {
 }
 
 function Home({ onSelect }) {
-  return <main className="shell home"><span className="eyebrow">ALICE'S LITTLE STUDIO</span><h1>English<br /><em>practice</em></h1><p className="lead">A small place to learn, answer quickly, and celebrate every win.</p><div className="test-grid">{tests.map((test) => <button className="test-card" key={test.id} onClick={() => onSelect(test)}><span className="card-icon">✦</span><span><strong>{test.title}</strong><small>{test.description}</small></span><span className="arrow">→</span></button>)}</div><p className="footer-note">{tests.length} practice tests ready</p></main>;
+  return <main className="shell home"><span className="eyebrow">ALÍZ'S LITTLE STUDIO</span><h1>English<br /><em>practice</em></h1><p className="lead">A small place to learn, answer quickly, and celebrate every win.</p><div className="test-grid">{tests.map((test) => <button className="test-card" key={test.id} onClick={() => onSelect(test)}><span className="card-icon">✦</span><span><strong>{test.title}</strong><small>{test.description}</small></span><span className="arrow">→</span></button>)}</div><p className="footer-note">{tests.length} practice tests ready</p></main>;
 }
 
 function TestIntro({ test, leaderboard, onStart, onBack }) {
