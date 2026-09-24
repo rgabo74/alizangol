@@ -1,0 +1,35 @@
+id: test-25-sep
+title: Test 25th Sep
+description: Szept 25-ös szódoga
+
+words:
+  - english: neck
+    hungarian: nyak
+  - english: arms
+    hungarian: karok
+  - english: legs
+    hungarian: lábak
+  - english: foot
+    hungarian: lábfej
+  - english: feet
+    hungarian: lábfejek
+  - english: toes
+    hungarian: lábujjak
+  - english: mouth
+    hungarian: száj
+  - english: eye
+    hungarian: szem
+  - english: head
+    hungarian: fej
+  - english: ears
+    hungarian: fülek
+  - english: hair
+    hungarian: haj
+  - english: hand
+    hungarian: kéz
+  - english: tooth
+    hungarian: fog
+  - english: teeth
+    hungarian: fogak
+  - english: body
+    hungarian: test  

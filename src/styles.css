@@ -13,3 +13,6 @@
 @media (min-width: 600px) { .shell { padding-left:45px; padding-right:45px; } .test-grid { grid-template-columns:1fr 1fr; } .test-card { min-height:120px; } }
 
 .exit-test { border: 0; border-radius: 999px; padding: 6px 10px; color: #0e7490; background: #e9f6ff; font-size: .78rem; font-weight: 700; }
+
+.home-section + .home-section { margin-top: 42px; }
+.home-section > .eyebrow { display: inline-block; font-size: .82rem; letter-spacing: .17em; }
