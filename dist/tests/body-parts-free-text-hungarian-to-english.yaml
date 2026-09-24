@@ -1,0 +1,152 @@
+id: body-parts-free-text-hungarian-to-english
+title: 'Body Parts: Type in English'
+description: Read the Hungarian body-part word and type its English translation.
+repetitions: 30
+penalty_seconds: 5
+target_seconds: 90
+reveal_correct_answer: true
+questions:
+  - id: body-part-1
+    type: free_text
+    prompt: 'Write the English word for: arc'
+    correct_answer: face
+    accepted_answers:
+      - face
+  - id: body-part-2
+    type: free_text
+    prompt: 'Write the English word for: pofák'
+    correct_answer: cheeks
+    accepted_answers:
+      - cheeks
+  - id: body-part-3
+    type: free_text
+    prompt: 'Write the English word for: áll'
+    correct_answer: chin
+    accepted_answers:
+      - chin
+  - id: body-part-4
+    type: free_text
+    prompt: 'Write the English word for: nyak'
+    correct_answer: neck
+    accepted_answers:
+      - neck
+  - id: body-part-5
+    type: free_text
+    prompt: 'Write the English word for: vállak'
+    correct_answer: shoulders
+    accepted_answers:
+      - shoulders
+  - id: body-part-6
+    type: free_text
+    prompt: 'Write the English word for: karok'
+    correct_answer: arms
+    accepted_answers:
+      - arms
+  - id: body-part-7
+    type: free_text
+    prompt: 'Write the English word for: könyök'
+    correct_answer: elbow
+    accepted_answers:
+      - elbow
+  - id: body-part-8
+    type: free_text
+    prompt: 'Write the English word for: csukló'
+    correct_answer: wrist
+    accepted_answers:
+      - wrist
+  - id: body-part-9
+    type: free_text
+    prompt: 'Write the English word for: kéz'
+    correct_answer: hand
+    accepted_answers:
+      - hand
+  - id: body-part-10
+    type: free_text
+    prompt: 'Write the English word for: ujjak'
+    correct_answer: fingers
+    accepted_answers:
+      - fingers
+  - id: body-part-11
+    type: free_text
+    prompt: 'Write the English word for: hüvelyk ujj'
+    correct_answer: thumb
+    accepted_answers:
+      - thumb
+  - id: body-part-12
+    type: free_text
+    prompt: 'Write the English word for: test'
+    correct_answer: body
+    accepted_answers:
+      - body
+  - id: body-part-13
+    type: free_text
+    prompt: 'Write the English word for: mellkas'
+    correct_answer: chest
+    accepted_answers:
+      - chest
+  - id: body-part-14
+    type: free_text
+    prompt: 'Write the English word for: has'
+    correct_answer: stomach
+    accepted_answers:
+      - stomach
+  - id: body-part-15
+    type: free_text
+    prompt: 'Write the English word for: pocak'
+    correct_answer: belly
+    accepted_answers:
+      - belly
+  - id: body-part-16
+    type: free_text
+    prompt: 'Write the English word for: fenék'
+    correct_answer: bottom
+    accepted_answers:
+      - bottom
+  - id: body-part-17
+    type: free_text
+    prompt: 'Write the English word for: popsi'
+    correct_answer: bum
+    accepted_answers:
+      - bum
+  - id: body-part-18
+    type: free_text
+    prompt: 'Write the English word for: lábak'
+    correct_answer: legs
+    accepted_answers:
+      - legs
+  - id: body-part-19
+    type: free_text
+    prompt: 'Write the English word for: térdek'
+    correct_answer: knees
+    accepted_answers:
+      - knees
+  - id: body-part-20
+    type: free_text
+    prompt: 'Write the English word for: lábfej'
+    correct_answer: foot
+    accepted_answers:
+      - foot
+  - id: body-part-21
+    type: free_text
+    prompt: 'Write the English word for: lábfejek'
+    correct_answer: feet
+    accepted_answers:
+      - feet
+  - id: body-part-22
+    type: free_text
+    prompt: 'Write the English word for: boka'
+    correct_answer: ankle
+    accepted_answers:
+      - ankle
+  - id: body-part-23
+    type: free_text
+    prompt: 'Write the English word for: lábujjak'
+    correct_answer: toes
+    accepted_answers:
+      - toes
+  - id: body-part-24
+    type: free_text
+    prompt: 'Write the English word for: száj'
+    correct_answer: mouth
+    accepted_answers:
+      - mouth
