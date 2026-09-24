@@ -20,9 +20,26 @@ const formatTime = (seconds) => {
 };
 
 const normalize = (value) => String(value ?? '').trim().toLocaleLowerCase();
-const chooseQuestions = (test) => Array.from({ length: test.repetitions }, () =>
-  test.questions[Math.floor(Math.random() * test.questions.length)],
-);
+const shuffle = (items) => {
+  const shuffled = [...items];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+  }
+  return shuffled;
+};
+
+const chooseQuestions = (test) => {
+  const selected = [];
+  while (selected.length < test.repetitions) {
+    const round = shuffle(test.questions);
+    if (selected.length && round.length > 1 && round[0] === selected.at(-1)) {
+      [round[0], round[1]] = [round[1], round[0]];
+    }
+    selected.push(...round.slice(0, test.repetitions - selected.length));
+  }
+  return selected;
+};
 const storageKey = (id) => `alice-english-leaderboard:${id}`;
 const getScores = (id) => {
   try { return JSON.parse(localStorage.getItem(storageKey(id)) || '[]'); } catch { return []; }
