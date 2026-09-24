@@ -1,8 +1,7 @@
 id: test-25-sep
 title: Test 25th Sep
 description: Szept 25-ös szódoga
-repetitions: 30
-target_seconds_per_repetition: 3
+repetitions: 15
 
 words:
   - english: neck

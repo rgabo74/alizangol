@@ -77,7 +77,7 @@ function multipleChoiceQuestion(words, word, direction, index) {
 function buildVocabularyTest(mode, vocabulary) {
   const words = vocabulary.words;
   const repetitions = Number(vocabulary.repetitions);
-  const targetSecondsPerRepetition = Number(vocabulary.target_seconds_per_repetition);
+  const targetSecondsPerRepetition = Number(mode.target_seconds_per_repetition);
   const questions = mode.vocabulary_mode === 'multiple_choice_bidirectional'
     ? [
       ...words.map((word, index) => multipleChoiceQuestion(words, word, 'hungarian_to_english', index)),
